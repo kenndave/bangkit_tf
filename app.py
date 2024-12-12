@@ -14,21 +14,17 @@ scheduler = BackgroundScheduler()
 model = None
 
 class Settings(BaseSettings):
-    firebase_credentials: str
-    project_id: str
-    database: str
+    project_id: str = 'capstone-project-442502'
+    database: str = 'bangkit-db'
 
     class Config:
         env_file = ".env"
 
 settings = Settings()
 
-credentials = service_account.Credentials.from_service_account_file(settings.firebase_credentials)
-
 db = firestore.Client(
     database=settings.database,
     project=settings.project_id,
-    credentials=credentials
 )
 
 def get_user_transactions(user_id: str):
@@ -141,7 +137,7 @@ async def predict_future_steps(user_id: str):
 
     first_timestamp = datetime.datetime.strptime(timestamps[0], "%Y-%m-%dT%H:%M:%S.%fZ")
     last_timestamp = datetime.datetime.strptime(timestamps[-1], "%Y-%m-%dT%H:%M:%S.%fZ")
-    data_range = (last_timestamp - first_timestamp).days
+    data_range = (last_timestamp - first_timestamp).days 
     
     if data_range > 730:  # More than 2 years
         time_unit = "months"
