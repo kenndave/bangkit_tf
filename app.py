@@ -118,7 +118,11 @@ async def startup_event():
 
 @app.get("/")
 async def root():
-    return {"message": "Model training scheduler is running!"}
+    return {"message": "Forecasting is ready!"}
+
+@app.get("/health", tags=["Health"])
+async def health_check():
+    return {"status": "OK", "message": f"Service is running"}
 
 @app.get("/predict/{user_id}")
 async def predict_future_steps(user_id: str):
