@@ -122,7 +122,7 @@ async def root():
 
 @app.get("/health", tags=["Health"])
 async def health_check():
-    return {"status": "OK", "message": f"Service is running"}
+    return {"status": "OK", "message": "Service is running"}
 
 @app.get("/predict/{user_id}")
 async def predict_future_steps(user_id: str):
